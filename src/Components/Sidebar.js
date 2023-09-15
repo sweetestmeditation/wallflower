@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
@@ -9,26 +9,44 @@ import SearchIcon from '@mui/icons-material/Search';
 import ConversationsItem from "./ConversationsItem";
 
 function Sidebar() {
+    const [conversations, setConversations] = useState([
+        {
+            name: "Test#1",
+            lastMessage: "Last Message #1",
+            timeStamp: "today",
+        },
+        {
+            name: "Test#2",
+            lastMessage: "Last Message #2",
+            timeStamp: "today",
+        },
+        {
+            name: "Test#3",
+            lastMessage: "Last Message #3",
+            timeStamp: "today",
+        },
+    ]);
+
     return (
         <div className="sidebar-container">
             <div className="sb-header">
                 <div>
                     <IconButton>
-                        <AccountCircleIcon />     
+                        <AccountCircleIcon />
                     </IconButton>
                 </div>
                 <div>
                     <IconButton>
-                        <PersonAddIcon />     
+                        <PersonAddIcon />
                     </IconButton>
                     <IconButton>
-                        <GroupAddIcon />     
+                        <GroupAddIcon />
                     </IconButton>
                     <IconButton>
-                        <AddCircleIcon />     
+                        <AddCircleIcon />
                     </IconButton>
                     <IconButton>
-                        <NightlightIcon />     
+                        <NightlightIcon />
                     </IconButton>
                 </div>
             </div>
@@ -36,14 +54,15 @@ function Sidebar() {
                 <IconButton>
                     <SearchIcon />
                 </IconButton>
-                <input type="text" placeholder="Search" className="search-box"/>
+                <input type="text" placeholder="Search" className="search-box" />
             </div>
             <div className="sb-conversations">
-                <ConversationsItem />
+                {conversations.map((conversation) => (
+                    <ConversationsItem props={conversation} key={conversation.name} />
+                ))}
             </div>
         </div>
     );
 }
-
 
 export default Sidebar;
